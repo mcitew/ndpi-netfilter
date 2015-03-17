@@ -40,7 +40,7 @@ ndpi_mt4_save(const void *entry, const struct xt_entry_match *match)
 	const struct xt_ndpi_mtinfo *info = (const void *)match->data;
         int i;
 
-        for (i = 1; i < NDPI_LAST_NFPROTO; i++){
+        for (i = 1; i <= NDPI_LAST_NFPROTO; i++){
                 if (NDPI_COMPARE_PROTOCOL_TO_BITMASK(info->flags, i) != 0){
                         printf("--%s ", prot_short_str[i]);
                 }
@@ -55,7 +55,7 @@ ndpi_mt4_print(const void *entry, const struct xt_entry_match *match,
 	const struct xt_ndpi_mtinfo *info = (const void *)match->data;
 	int i;
 
-        for (i = 1; i < NDPI_LAST_NFPROTO; i++){
+        for (i = 1; i <= NDPI_LAST_NFPROTO; i++){
                 if (NDPI_COMPARE_PROTOCOL_TO_BITMASK(info->flags, i) != 0){
                         printf("protocol %s ", prot_long_str[i]);
                 }
@@ -71,7 +71,7 @@ ndpi_mt4_parse(int c, char **argv, int invert, unsigned int *flags,
         int i;
 
         *flags = 0;
-        for (i = 1; i < NDPI_LAST_NFPROTO; i++){
+        for (i = 1; i <= NDPI_LAST_NFPROTO; i++){
                 if (c == i){
                         NDPI_ADD_PROTOCOL_TO_BITMASK(info->flags, i);
                         /*printf("Parameter detected as protocol %s.\n",
@@ -104,7 +104,7 @@ ndpi_mt_help(void)
         int i;
 
 	printf("ndpi match options:\n");
-        for (i = 1; i < NDPI_LAST_NFPROTO; i++){
+        for (i = 1; i <= NDPI_LAST_NFPROTO; i++){
                 printf("--%s Match for %s protocol packets.\n",
                        prot_short_str[i], prot_long_str[i]);
         }
