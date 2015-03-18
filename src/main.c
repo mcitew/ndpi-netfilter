@@ -316,7 +316,7 @@ ndpi_enable_protocols (const struct xt_ndpi_mtinfo*info)
 {
         int i;
 
-        for (i = 1; i < NDPI_LAST_IMPLEMENTED_PROTOCOL; i++){
+        for (i = 1; i <= NDPI_LAST_IMPLEMENTED_PROTOCOL; i++){
                 if (NDPI_COMPARE_PROTOCOL_TO_BITMASK(info->flags, i) != 0){
                         spin_lock_bh (&ipq_lock);
                         atomic_inc(&protocols_cnt[i-1]);
@@ -334,7 +334,7 @@ ndpi_disable_protocols (const struct xt_ndpi_mtinfo*info)
 {
         int i;
 
-        for (i = 1; i < NDPI_LAST_IMPLEMENTED_PROTOCOL; i++){
+        for (i = 1; i <= NDPI_LAST_IMPLEMENTED_PROTOCOL; i++){
                 if (NDPI_COMPARE_PROTOCOL_TO_BITMASK(info->flags, i) != 0){
                         spin_lock_bh (&ipq_lock);
                         if (atomic_dec_and_test(&protocols_cnt[i-1])){
