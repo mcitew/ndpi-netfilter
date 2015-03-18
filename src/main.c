@@ -255,7 +255,7 @@ ndpi_alloc_flow (struct nf_conn * ct)
 
 
 static void
-ndpi_free_flow (struct nf_conn * ct)
+kndpi_free_flow (struct nf_conn * ct)
 {
         struct osdpi_flow_node * flow;
 
@@ -365,7 +365,7 @@ ndpi_conntrack_event (struct notifier_block *this, unsigned long ev,
 
                 ndpi_free_id (src);
                 ndpi_free_id (dst);
-                ndpi_free_flow (ct);
+                kndpi_free_flow (ct);
         }
 
         return NOTIFY_DONE;
@@ -392,7 +392,7 @@ ndpi_conntrack_event(unsigned int events, struct nf_ct_event *item)
 
                 ndpi_free_id (src);
                 ndpi_free_id (dst);
-                ndpi_free_flow (ct);
+                kndpi_free_flow (ct);
         }
 
         return 0;
