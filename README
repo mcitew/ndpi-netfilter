@@ -7,7 +7,7 @@ The prerequisites are:
 - Following packages to compile kernel-modules:
    linux-headers
    iptables-dev >= version 1.4.21-1ubuntu1
-   nDPI source package
+   nDPI source package ( updated to build 9072 )
 
 
 Compiled kernel features
