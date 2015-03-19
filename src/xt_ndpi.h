@@ -47,7 +47,8 @@ struct xt_ndpi_mtinfo {
 "SKYFILE_PREPAID","SKYFILE_RUDICS","SKYFILE_POSTPAID","CITRIX_ONLINE","APPLE","WEBEX","WHATSAPP","APPLE_ICLOUD","VIBER",\
 "APPLE_ITUNES","RADIUS","WINDOWS_UPDATE","TEAMVIEWER","TUENTI","LOTUS_NOTES","SAP","GTP","UPNP","LLMNR","REMOTE_SCAN","SPOTIFY",\
 "WEBM","H323","OPENVPN","NOE","CISCOVPN","TEAMSPEAK","TOR","SKINNY","RTCP","RSYNC","ORACLE","CORBA","UBUNTUONE","WHOIS_DAS",\
-"COLLECTD","SOCKS5","SOCKS4","RTMP","FTP_DATA","WIKIPEDIA","ZMQ","AMAZON","EBAY","CNN","MEGACO","REDIS","PANDO","VHUA","TELEGRAM","FACEBOOK_CHAT","PANDORA"
+"COLLECTD","SOCKS5","SOCKS4","RTMP","FTP_DATA","WIKIPEDIA","ZMQ","AMAZON","EBAY","CNN","MEGACO","REDIS","PANDO","VHUA","TELEGRAM",\
+"FACEBOOK_CHAT","PANDORA"
 #endif
 
 #ifndef NDPI_PROTOCOL_SHORT_STRING
@@ -66,7 +67,8 @@ struct xt_ndpi_mtinfo {
 "skyfile_prepaid","skyfile_rudics","skyfile_postpaid","citrix_online","apple","webex","whatsapp","apple_icloud","viber",\
 "apple_itunes","radius","windows_update","teamviewer","tuenti","lotusnotes","sap","gtp","upnp","llmnr","remotescan","spotify",\
 "webm","h323","openvpn","noe","ciscovpn","teamspeak","tor","skinny","rtcp","rsync","oracle","corba","ubuntuone","whois_das",\
-"collectd","socks5","socks4","rtmp","ftpdata","wikipedia","zmq","amazon","ebay","cnn","megaco","redis","pando","vhua","telegram","facebook_chat","pandora"
+"collectd","socks5","socks4","rtmp","ftpdata","wikipedia","zmq","amazon","ebay","cnn","megaco","redis","pando","vhua","telegram",\
+"facebook_chat","pandora"
 #endif
 
 #ifndef NDPI_LAST_NFPROTO
