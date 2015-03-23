@@ -8,6 +8,7 @@ The prerequisites are:
    linux-headers
    iptables-dev >= version 1.4.21-1ubuntu1
    nDPI source package ( updated to nDPI revision 9089, revision after that added patricia library breaks kernel compilation ).
+   nDPI version 9136 can be compiled with an external patch.
 
 
 Compiled kernel features
