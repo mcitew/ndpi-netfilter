@@ -1,0 +1,141 @@
+--- nDPI-9136/src/lib/ndpi_main.c	2015-03-20 09:14:04.822364707 +0800
++++ nDPI/src/lib/ndpi_main.c	2015-03-20 09:59:03.498433806 +0800
+@@ -41,6 +41,7 @@
+ #ifdef __KERNEL__
+ #include <linux/version.h>
+ #define printf printk
++#include <linux/inet.h>
+ #else
+ #include <time.h>
+ #ifndef WIN32
+@@ -1745,7 +1746,11 @@
+   for(i=0; tor_host_list[i] != NULL; i++) {
+     struct in_addr pin;
+ 
++#ifdef __KERNEL__
++    pin.s_addr = in_aton(tor_host_list[i]);
++#else
+     pin.s_addr = inet_addr(tor_host_list[i]);
++#endif
+     add_to_ptree(ndpi_str->tor_ptree, AF_INET, &pin, 32 /* bits */);
+   }
+ }
+--- nDPI-9136/src/lib/third_party/src/patricia.c	2015-03-20 09:14:25.058365225 +0800
++++ nDPI/src/lib/third_party/src/patricia.c	2015-03-20 15:16:10.054920981 +0800
+@@ -39,6 +39,7 @@
+  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. 
+ */
+ 
++#ifndef __KERNEL__
+ #include <assert.h> /* assert */
+ #include <ctype.h> /* isdigit */
+ #include <errno.h> /* errno */
+@@ -53,6 +54,33 @@
+ #include <netinet/in.h> /* BSD, Linux: for inet_addr */
+ #include <arpa/inet.h> /* BSD, Linux, Solaris: for inet_addr */
+ #endif
++#endif
++
++#ifdef __KERNEL__
++#include <linux/inet.h>
++#define assert(x)                                                       \
++do {    if (x) break;                                                   \
++        printk(KERN_EMERG "### ASSERTION FAILED %s: %s: %d: %s\n",      \
++               __FILE__, __func__, __LINE__, #x); dump_stack(); BUG();  \
++} while (0)
++
++char *inet_ntop(int af, const void* src, char *dst, int size)
++{ 
++  int ret = 0;
++  if( af == AF_INET ) { 
++    if( size <  INET_ADDRSTRLEN /* 16 */ ) return NULL;
++    ret = sprintf(dst, "%pI4", src );
++  }
++  if( af == AF_INET6 ) {  
++    if( size <  INET6_ADDRSTRLEN /* 48 */ ) return NULL;
++    ret = sprintf(dst, "%pI6", src );
++  }
++  if ( ret > 0 )
++      return dst; 
++  else
++      return NULL; 
++} 
++#endif
+ 
+ #include "patricia.h"
+ 
+@@ -133,6 +161,9 @@
+ ndpi_my_inet_pton (int af, const char *src, void *dst)
+ {
+   if(af == AF_INET) {
++#ifdef __KERNEL__
++    return in4_pton(src, -1, dst, -1, NULL);
++#else 
+     int i;
+     u_char xp[sizeof(struct in_addr)] = {0, 0, 0, 0};
+ 
+@@ -159,13 +190,20 @@
+     }
+     memcpy (dst, xp, sizeof(struct in_addr));
+     return (1);
++#endif
+ #ifdef HAVE_IPV6
+   } else if(af == AF_INET6) {
++#ifdef __KERNEL__
++    return in6_pton(src, -1, dst, -1, NULL);
++#else
+     return (inet_pton (af, src, dst));
++#endif
+ #endif /* HAVE_IPV6 */
+   } else {
+ #ifndef NT
++#ifndef __KERNEL__
+     errno = EAFNOSUPPORT;
++#endif
+ #endif /* NT */
+     return -1;
+   }
+@@ -336,7 +374,12 @@
+ #endif /* HAVE_IPV6 */
+ 
+   if((cp = strchr (string, '/')) != NULL) {
++#ifdef __KERNEL__
++    kstrtol (cp + 1, 10, &bitlen );
++    /* sscanf(cp+1, "%ld", &bitlen); */
++#else
+     bitlen = atol (cp + 1);
++#endif
+     /* *cp = '\0'; */
+     /* copy the string to save. Avoid destroying the string */
+     assert (cp - string < MAXLINE);
+@@ -362,7 +405,11 @@
+     inet6_addr(string, &sin6);
+     return (ndpi_New_Prefix (AF_INET6, &sin6, bitlen));
+ #else
+-    if(inet_pton (AF_INET6, string, &sin6) <= 0)
++#ifdef __KERNEL__
++    if( in6_pton( string, -1, (u8*)&sin6, -1, NULL) <= 0 )
++#else
++    if(inet_pton (AF_INET6, string, (char*)&sin6) <= 0)
++#endif
+       return (NULL);
+ #endif /* NT */
+     return (ndpi_New_Prefix (AF_INET6, &sin6, bitlen));
+--- nDPI-9136/src/lib/third_party/include/patricia.h	2015-03-20 09:14:35.058365481 +0800
+--- nDPI/src/lib/third_party/include/patricia.h	2015-03-20 09:14:35.058365481 +0800
+@@ -52,6 +52,7 @@
+ 
+ #define addroute make_and_lookup
+ 
++#ifndef __KERNEL__
+ #include <sys/types.h> /* for u_* definitions (on FreeBSD 5) */
+ 
+ #include <errno.h> /* for EAFNOSUPPORT */
+@@ -69,6 +70,7 @@
+ #include <winsock2.h>
+ #include <ws2tcpip.h> /* IPv6 */
+ #endif
++#endif
+ 
+ /* { from mrt.h */
+ 
