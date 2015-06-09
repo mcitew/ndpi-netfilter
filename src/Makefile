@@ -97,7 +97,7 @@ xt_ndpi-y := main.o \
                 ${NDPI_PRO}/sflow.o \
                 ${NDPI_PRO}/shoutcast.o \
                 ${NDPI_PRO}/sip.o \
-                ${NDPI_PRO}/zmq.o \
+                ${NDPI_PRO}/zeromq.o \
                 ${NDPI_PRO}/skinny.o \
                 ${NDPI_PRO}/skype.o \
                 ${NDPI_PRO}/smb.o \
