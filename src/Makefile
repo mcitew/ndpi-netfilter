@@ -87,6 +87,7 @@ xt_ndpi-y := main.o \
                 ${NDPI_PRO}/twitter.o \
                 ${NDPI_PRO}/qq.o \
                 ${NDPI_PRO}/quake.o \
+								${NDPI_PRO}/quic.o \
                 ${NDPI_PRO}/radius.o \
                 ${NDPI_PRO}/rdp.o \
                 ${NDPI_PRO}/rtp.o \
@@ -97,12 +98,14 @@ xt_ndpi-y := main.o \
                 ${NDPI_PRO}/sflow.o \
                 ${NDPI_PRO}/shoutcast.o \
                 ${NDPI_PRO}/sip.o \
-                ${NDPI_PRO}/zmq.o \
+                ${NDPI_PRO}/zeromq.o \
                 ${NDPI_PRO}/skinny.o \
                 ${NDPI_PRO}/skype.o \
                 ${NDPI_PRO}/smb.o \
                 ${NDPI_PRO}/snmp.o \
                 ${NDPI_PRO}/socrates.o \
+								${NDPI_PRO}/socks4.o \
+								${NDPI_PRO}/socks5.o \
                 ${NDPI_PRO}/sopcast.o \
                 ${NDPI_PRO}/soulseek.o \
                 ${NDPI_PRO}/spotify.o \
@@ -137,7 +140,7 @@ xt_ndpi-y := main.o \
                 ${NDPI_PRO}/xdmcp.o \
                 ${NDPI_PRO}/yahoo.o \
                 ${NDPI_PRO}/megaco.o \
-                ${NDPI_PRO}/redis.o \
+                ${NDPI_PRO}/redis_net.o \
                 ${NDPI_PRO}/vhua.o \
                 ${NDPI_PRO}/ayiya.o \
                 ${NDPI_PRO}/zattoo.o
