@@ -1,20 +1,20 @@
-/* 
+/*
  * xt_ndpi.h
  * Copyright (C) 2010-2012 G. Elian Gidoni <geg@gnu.org>
  *               2012 Ed Wildgoose <lists@wildgooses.com>
- * 
+ *
  * This file is part of nDPI, an open source deep packet inspection
  * library based on the PACE technology by ipoque GmbH
- * 
+ *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
  * as published by the Free Software Foundation; version 2 of the License.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
@@ -48,7 +48,7 @@ struct xt_ndpi_mtinfo {
 "APPLE_ITUNES","RADIUS","WINDOWS_UPDATE","TEAMVIEWER","TUENTI","LOTUS_NOTES","SAP","GTP","UPNP","LLMNR","REMOTE_SCAN","SPOTIFY",\
 "WEBM","H323","OPENVPN","NOE","CISCOVPN","TEAMSPEAK","TOR","SKINNY","RTCP","RSYNC","ORACLE","CORBA","UBUNTUONE","WHOIS_DAS",\
 "COLLECTD","SOCKS5","SOCKS4","RTMP","FTP_DATA","WIKIPEDIA","ZMQ","AMAZON","EBAY","CNN","MEGACO","REDIS","PANDO","VHUA","TELEGRAM",\
-"FACEBOOK_CHAT","PANDORA","Vevo"
+"FACEBOOK_CHAT","PANDORA","Vevo","QUIC"
 #endif
 
 #ifndef NDPI_PROTOCOL_SHORT_STRING
@@ -68,7 +68,7 @@ struct xt_ndpi_mtinfo {
 "apple_itunes","radius","windows_update","teamviewer","tuenti","lotusnotes","sap","gtp","upnp","llmnr","remotescan","spotify",\
 "webm","h323","openvpn","noe","ciscovpn","teamspeak","tor","skinny","rtcp","rsync","oracle","corba","ubuntuone","whois_das",\
 "collectd","socks5","socks4","rtmp","ftpdata","wikipedia","zmq","amazon","ebay","cnn","megaco","redis","pando","vhua","telegram",\
-"facebook_chat","pandora","vevo"
+"facebook_chat","pandora","vevo","quic"
 #endif
 
 #ifndef NDPI_LAST_NFPROTO
